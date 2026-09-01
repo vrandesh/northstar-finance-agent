@@ -163,6 +163,13 @@ class Explanation(BaseModel):
     key_points: list[str] = Field(default_factory=list)
     confidence: float = 0.5
 
+class Action(BaseModel):
+    tool: str
+    idempotency_key: str
+    posting_ref: str | None = None
+    applied: bool = False
+    replayed: bool = False
+    at: str = Field(default_factory=now_iso)
 
 class ApprovalRequest(BaseModel):
     run_id: str
