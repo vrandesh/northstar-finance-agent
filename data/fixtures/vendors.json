@@ -1,0 +1,33 @@
+{
+  "V-1001": {
+    "vendor_id": "V-1001", "legal_name": "Acme Industrial Pty Ltd",
+    "status": "ACTIVE", "risk_flags": [], "bank_last4": "1234",
+    "bank_country": "AU", "created_at": "2023-02-11", "last_updated": "2025-06-01"
+  },
+  "V-2002": {
+    "vendor_id": "V-2002", "legal_name": "Globex Supplies Pty Ltd",
+    "status": "ACTIVE", "risk_flags": [], "bank_last4": "5678",
+    "bank_country": "AU", "created_at": "2022-09-03", "last_updated": "2024-11-20"
+  },
+  "V-3003": {
+    "vendor_id": "V-3003", "legal_name": "Initech Trading Co",
+    "status": "ACTIVE", "risk_flags": ["bank_changed", "overseas_account", "new_vendor"],
+    "bank_last4": "8842", "bank_country": "SG",
+    "created_at": "2026-08-14", "last_updated": "2026-08-25"
+  },
+  "V-4004": {
+    "vendor_id": "V-4004", "legal_name": "Umbrella Logistics Pty Ltd",
+    "status": "ACTIVE", "risk_flags": [], "bank_last4": "4444",
+    "bank_country": "AU", "created_at": "2021-05-19", "last_updated": "2025-01-15"
+  },
+  "V-5005": {
+    "vendor_id": "V-5005", "legal_name": "Soylent Foods Pty Ltd",
+    "status": "ACTIVE", "risk_flags": [], "bank_last4": "5005",
+    "bank_country": "AU", "created_at": "2020-07-30", "last_updated": "2024-08-08"
+  },
+  "V-6006": {
+    "vendor_id": "V-6006", "legal_name": "Wayne Enterprises Ltd",
+    "status": "ACTIVE", "risk_flags": ["overseas_account"], "bank_last4": "7777",
+    "bank_country": "SG", "created_at": "2021-03-12", "last_updated": "2024-02-01"
+  }
+}

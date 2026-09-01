@@ -1,0 +1,47 @@
+{
+  "PO-7001": {
+    "po_ref": "PO-7001", "vendor_id": "V-1001", "currency": "AUD",
+    "approval_status": "approved", "allow_freight": false,
+    "lines": [{"line_id": "L1", "description": "Maintenance services",
+               "quantity": "100", "unit_price": "120", "line_total": "12000",
+               "line_type": "goods"}],
+    "total": "12000",
+    "receipts": [{"line_id": "L1", "received_quantity": "100"}]
+  },
+  "PO-7002": {
+    "po_ref": "PO-7002", "vendor_id": "V-2002", "currency": "AUD",
+    "approval_status": "approved", "allow_freight": false,
+    "lines": [{"line_id": "L1", "description": "Packaging stock",
+               "quantity": "10", "unit_price": "850", "line_total": "8500",
+               "line_type": "goods"}],
+    "total": "8500",
+    "receipts": [{"line_id": "L1", "received_quantity": "10"}]
+  },
+  "PO-7003": {
+    "po_ref": "PO-7003", "vendor_id": "V-3003", "currency": "AUD",
+    "approval_status": "approved", "allow_freight": false,
+    "lines": [{"line_id": "L1", "description": "Consulting engagement",
+               "quantity": "1", "unit_price": "45000", "line_total": "45000",
+               "line_type": "services"}],
+    "total": "45000",
+    "receipts": [{"line_id": "L1", "received_quantity": "1"}]
+  },
+  "PO-7005": {
+    "po_ref": "PO-7005", "vendor_id": "V-5005", "currency": "AUD",
+    "approval_status": "approved", "allow_freight": false,
+    "lines": [{"line_id": "L1", "description": "Catering supplies",
+               "quantity": "3", "unit_price": "5000", "line_total": "15000",
+               "line_type": "goods"}],
+    "total": "15000",
+    "receipts": [{"line_id": "L1", "received_quantity": "3"}]
+  },
+  "PO-7006": {
+    "po_ref": "PO-7006", "vendor_id": "V-6006", "currency": "AUD",
+    "approval_status": "approved", "allow_freight": false,
+    "lines": [{"line_id": "L1", "description": "Overseas equipment",
+               "quantity": "1", "unit_price": "30000", "line_total": "30000",
+               "line_type": "goods"}],
+    "total": "30000",
+    "receipts": [{"line_id": "L1", "received_quantity": "1"}]
+  }
+}
