@@ -8,6 +8,30 @@ The agent retrieves relevant finance policy, collects invoice evidence, runs det
 
 The Language Model can explain the result, but it cannot choose the outcome or authorise a financial Situation. 
 
+## Run it
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+python -m pytest -q                 
+uvicorn app.api:app --port 8000     # start the API
+```
+Five endpoints, four operations:
+
+```bash
+# start a run (stops at the approval gate for a payable invoice)
+curl -sX POST localhost:8000/runs -H 'content-type: application/json' \
+  -d '{"case_id":"FIN-001","invoice_ref":"INV-1001","vendor_id":"V-1001","amount":"12000","currency":"AUD"}'
+
+curl -s  localhost:8000/runs/<run_id>            # status + result + audit events
+curl -sX POST localhost:8000/runs/<run_id>/approve -H 'content-type: application/json' \
+  -d '{"decision":"approve","approver":"dir@northstar","approver_role":"Department Director","expected_version":2}'
+
+curl -sX POST localhost:8000/evaluations         # run FIN-001..005, report pass/fail
+```
+
+
 ## What the design/ framework does in this case
 * LangGraph provides the state machine, SQLLite checkpointer (restart/resume)
 * Interrupt(approval stop)
