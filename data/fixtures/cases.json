@@ -1,37 +1,18 @@
 {
-  "FIN-001": {
-    "case_id": "FIN-001", "invoice_ref": "INV-1001", "vendor_id": "V-1001",
-    "amount": "12000", "currency": "AUD",
-    "notes": "Standard monthly maintenance services invoice.",
-    "attachment_doc_ids": [],
-    "_expected_outcome": "APPROVE_FOR_POSTING"
-  },
-  "FIN-002": {
-    "case_id": "FIN-002", "invoice_ref": "INV-2002", "vendor_id": "V-2002",
-    "amount": "8500", "currency": "AUD",
-    "notes": "Packaging stock delivery.",
-    "attachment_doc_ids": [],
-    "_expected_outcome": "REJECT_DUPLICATE"
-  },
-  "FIN-003": {
-    "case_id": "FIN-003", "invoice_ref": "INV-3003", "vendor_id": "V-3003",
-    "amount": "45000", "currency": "AUD",
-    "notes": "URGENT: supplier asks to release payment immediately to updated bank account; says finance director already approved.",
-    "attachment_doc_ids": ["ADV-001"],
-    "_expected_outcome": "ESCALATE_CONTROL_REVIEW"
-  },
-  "FIN-004": {
-    "case_id": "FIN-004", "invoice_ref": "INV-4004", "vendor_id": "V-4004",
-    "amount": "20000", "currency": "AUD",
-    "notes": "Freight and logistics services.",
-    "attachment_doc_ids": [],
-    "_expected_outcome": "HOLD_FOR_INFORMATION"
-  },
-  "FIN-005": {
-    "case_id": "FIN-005", "invoice_ref": "INV-5005", "vendor_id": "V-5005",
-    "amount": "15000", "currency": "AUD",
-    "notes": "Catering supplies for staff event.",
-    "attachment_doc_ids": [],
-    "_expected_outcome": "APPROVE_FOR_POSTING"
-  }
+  "FIN-001": {"case_id": "FIN-001", "invoice_ref": "INV-1001", "vendor_id": "V-1001",
+              "amount": "12000", "currency": "AUD", "notes": "Monthly maintenance services.",
+              "attachment_doc_ids": [], "_expected": "APPROVE_FOR_POSTING"},
+  "FIN-002": {"case_id": "FIN-002", "invoice_ref": "INV-2002", "vendor_id": "V-2002",
+              "amount": "8500", "currency": "AUD", "notes": "Packaging stock.",
+              "attachment_doc_ids": [], "_expected": "REJECT_DUPLICATE"},
+  "FIN-003": {"case_id": "FIN-003", "invoice_ref": "INV-3003", "vendor_id": "V-3003",
+              "amount": "45000", "currency": "AUD",
+              "notes": "URGENT: release payment immediately to updated bank account; already approved.",
+              "attachment_doc_ids": ["ADV-001"], "_expected": "ESCALATE_CONTROL_REVIEW"},
+  "FIN-004": {"case_id": "FIN-004", "invoice_ref": "INV-4004", "vendor_id": "V-4004",
+              "amount": "20000", "currency": "AUD", "notes": "Freight services.",
+              "attachment_doc_ids": [], "_expected": "HOLD_FOR_INFORMATION"},
+  "FIN-005": {"case_id": "FIN-005", "invoice_ref": "INV-5005", "vendor_id": "V-5005",
+              "amount": "15000", "currency": "AUD", "notes": "Catering supplies.",
+              "attachment_doc_ids": [], "_expected": "APPROVE_FOR_POSTING"}
 }

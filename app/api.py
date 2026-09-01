@@ -7,9 +7,9 @@
 
 from decimal import Decimal
 from typing import Literal
-from app.workflowagent import Agent
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+from .workflowagent import Agent
 
 app = FastAPI(title="NS AP Agent", version="1.0.0")
 _agent: Agent | None = None

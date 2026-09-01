@@ -56,21 +56,15 @@ class Store:
             self._db.commit()
             return version
     
-    def save_run(self, run_id, case_id, status, result=None, bump=True) -> int:
+    def get_run(self, run_id):
         with self._lock:
-            row = self._db.execute("SELECT version FROM runs WHERE run_id=?", (run_id,)).fetchone()
-            payload = json.dumps(result, default=str) if result is not None else None
-            if row:
-                version = row["version"] + (1 if bump else 0)
-                self._db.execute("UPDATE runs SET status=?, version=?, result=COALESCE(?,result), "
-                                 "updated_at=? WHERE run_id=?",
-                                 (status, version, payload, now_iso(), run_id))
-            else:
-                version = 1
-                self._db.execute("INSERT INTO runs VALUES(?,?,?,?,?,?,?)",
-                                 (run_id, case_id, status, version, payload, now_iso(), now_iso()))
-            self._db.commit()
-            return version
+            row = self._db.execute("SELECT * FROM runs WHERE run_id=?", (run_id,)).fetchone()
+        if not row:
+            return None
+        return {"run_id": row["run_id"], "case_id": row["case_id"], "status": row["status"],
+                "version": row["version"],
+                "result": json.loads(row["result"]) if row["result"] else None,
+                "created_at": row["created_at"], "updated_at": row["updated_at"]}
     
     def log(self, run_id, node, event, outcome="", detail=None):
         with self._lock:

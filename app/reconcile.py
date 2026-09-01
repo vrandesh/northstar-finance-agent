@@ -11,7 +11,7 @@ from decimal import Decimal
 
 from .config import AUTHORITY_MATRIX
 from .retrieval import load_corpus
-from .schemas import (Calc, CaseRequest, Citation, ExceptionCategory, ExceptionItem,
+from .schemas import (Calculation, CaseRequest, Citation, ExceptionCategory, ExceptionItem,
                       Fact, Outcome, PolicyFinding, ToolResult, ToolStatus)
 
 TOLERANCE_CAP = Decimal("50")
@@ -71,7 +71,7 @@ class Decision:
     control: str
     required_role: str = ""
     facts: list[Fact] = field(default_factory=list)
-    calculations: list[Calc] = field(default_factory=list)
+    calculations: list[Calculation] = field(default_factory=list)
     policy_findings: list[PolicyFinding] = field(default_factory=list)
     exceptions: list[ExceptionItem] = field(default_factory=list)
     unknowns: list[str] = field(default_factory=list)
@@ -79,7 +79,7 @@ class Decision:
 
     def context(self) -> dict:
         return {"case_id": self._case_id, "outcome": self.outcome.value,
-                "exceptions": [e.category.value for e in self.exceptions]}
+                "exceptions": [e.category for e in self.exceptions]}
 
     _case_id: str = ""
 
@@ -93,17 +93,19 @@ def reconcile(case: CaseRequest, *, vendor: ToolResult, po: ToolResult,
     p = po.data if po.status == ToolStatus.OK else None
 
     facts: list[Fact] = []
-    calcs: list[Calc] = []
+    calcs: list[Calculation] = []
     findings: list[PolicyFinding] = []
     exceptions: list[ExceptionItem] = []
     unknowns: list[str] = []
 
     def finding(doc, sec, passed, detail):
-        findings.append(PolicyFinding(rule=f"{doc} {policy.cite(doc, sec).section}",
-                                      citation=policy.cite(doc, sec), passed=passed, detail=detail))
+        findings.append(PolicyFinding(rule_id=f"{doc} {policy.cite(doc, sec).section}",
+                                      citation=policy.cite(doc, sec),
+                                      result="pass" if passed else "fail", detail=detail))
 
     def exception(cat, rule, expected, observed, owner):
-        exceptions.append(ExceptionItem(category=cat, rule=rule, expected=expected,
+        exceptions.append(ExceptionItem(category=cat.value if hasattr(cat, "value") else cat,
+                                        failed_rule=rule, expected=expected,
                                         observed=observed, owner=owner))
 
     def decide(outcome, control, role=""):
@@ -186,7 +188,7 @@ def reconcile(case: CaseRequest, *, vendor: ToolResult, po: ToolResult,
     po_total = Decimal(str(p["total"]))
     variance = (case.amount - po_total).copy_abs().quantize(Decimal("0.01"))
     tolerance = min(TOLERANCE_CAP, po_total * Decimal("0.01")).quantize(Decimal("0.01"))
-    calcs.append(Calc(name="three_way_match",
+    calcs.append(Calculation(name="three_way_match",
                       inputs={"invoice": str(case.amount), "po_total": str(po_total), "tolerance": str(tolerance)},
                       formula="abs(invoice - po_total) <= min(50, 1% of po_total)",
                       result=f"variance={variance} within_tolerance={variance <= tolerance}"))
@@ -208,7 +210,7 @@ def reconcile(case: CaseRequest, *, vendor: ToolResult, po: ToolResult,
 
     # 7. Everything passed — approve and name the required approver
     role = role_for_amount(case.amount)
-    calcs.append(Calc(name="approval_authority", inputs={"amount": str(case.amount)},
+    calcs.append(Calculation(name="approval_authority", inputs={"amount": str(case.amount)},
                       formula="lowest role whose limit >= amount (FIN-POL-003 v4.0)",
                       result=f"required_role={role}"))
     finding("FIN-POL-003", 2, True, f"Requires approval by {role}.")
