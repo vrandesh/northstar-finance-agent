@@ -8,6 +8,16 @@ The agent retrieves relevant finance policy, collects invoice evidence, runs det
 
 The Language Model can explain the result, but it cannot choose the outcome or authorise a financial Situation. 
 
+## What the design/ framework does in this case
+* LangGraph provides the state machine, SQLLite checkpointer (restart/resume)
+* Interrupt(approval stop)
+* The code owns everything that matters for correctness and safety
+** Retrieved text is evidence (not prompt instructions)
+** All calculations arithmetic and the outcome decision
+** tool timeouts and permissions, output validation, and idempotency
+* The LLM only writes a one-line explanation - it has no outcome field
+* The code can never move a payment nor make a transaction
+
 
 ## The Five Cases to Test
 
