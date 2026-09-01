@@ -18,6 +18,12 @@ The Language Model can explain the result, but it cannot choose the outcome or a
 * The LLM only writes a one-line explanation - it has no outcome field
 * The code can never move a payment nor make a transaction
 
+## Where AI assistance is used
+* Challenged AI to review the design as Advocatus Diaboli
+* Fixtures creation
+* Stress test edge cases
+* Review / Summary of Corpus documents
+
 
 ## The Five Cases to Test
 
