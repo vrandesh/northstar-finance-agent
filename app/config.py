@@ -28,9 +28,12 @@ TOOL_MAX_ATTEMPTS = int(os.getenv("TOOL_MAX_ATTEMPTS", "3"))
 DB_PATH = os.getenv("DB_PATH", str(ROOT / "run_state.sqlite"))
 
 # Authority Matrix to understand the approvals and gating mechanism
-AUTH_MATRIX = [
+AUTHORITY_MATRIX = [
     ("Cost Centre Manager", 10_000),
     ("Department Director", 50_000),
     ("Executive Director", 250_000),
     ("Chief Financial Officer", 1_000_000),
 ]
+
+# Purchase-order refs that simulate an unreachable upstream (used by FIN-004)
+TIMEOUT_PO_REFS = set(filter(None, os.getenv("TIMEOUT_PO_REFS", "PO-7004").split(",")))
