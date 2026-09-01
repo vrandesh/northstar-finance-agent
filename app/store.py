@@ -1,3 +1,7 @@
+"""
+AI Assist used to generate and store structured data related to AI model runs and events. (Only to Save Time)
+"""
+
 import json
 import re
 import sqlite3
@@ -16,3 +20,35 @@ CREATE TABLE IF NOT EXISTS idempotency (key TEXT PRIMARY KEY, result TEXT, creat
 CREATE TABLE IF NOT EXISTS approvals (
   run_id TEXT PRIMARY KEY, request TEXT, status TEXT, decision TEXT, updated_at TEXT);
 """
+
+class Store:
+    def __init__(self, path: str) -> None:
+        self._db = sqlite3.connect(path, check_same_thread=False)
+        self._db.row_factory = sqlite3.Row
+        self._lock = threading.Lock()
+        with self._lock:
+            self._db.executescript(_SCHEMA)
+            self._db.commit()
+            
+    def save_run(self, run_id, case_id, result=None):
+        pass
+    
+    def get_run(self, run_id):
+        pass
+    
+    def log(self):
+        pass
+    
+    def events(self, run_id):
+        pass
+    
+    def remember(self, key, result=None):
+        pass
+    
+    def set_approval(self):
+        pass
+    
+    def get_approval(self):
+        pass
+    
+    
