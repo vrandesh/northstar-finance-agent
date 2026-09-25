@@ -2,7 +2,7 @@
 Agentic AI Workflow with RAG and LangGraph Implementation
 
 
-This project implements a small accounts-payable workflow for the AgentiC AI Engineer assessment. 
+This project implements a small accounts-payable workflow for the AgentiC AI Project
 
 The agent retrieves relevant finance policy, collects invoice evidence, runs deterministic calculations controls and pauses for a human in the loop approval before recording a posting decision. 
 
