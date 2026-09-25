@@ -1,5 +1,5 @@
 # northstar-finance-agent
-Agentic AI Workflow with RAG and LangGraph Implementation for AI Engineer Test
+Agentic AI Workflow with RAG and LangGraph Implementation
 
 
 This project implements a small accounts-payable workflow for the AgentiC AI Engineer assessment. 
